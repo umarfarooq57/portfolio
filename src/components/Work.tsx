@@ -9,7 +9,8 @@ const projects = [
     category: "Web Platform",
     desc: "A comprehensive employment and recruitment agency platform to connect professionals with top employers. Features job boards and attendance tracking.",
     link: "https://apply.uniquejob.ca/",
-    imageAlt: "UJS",
+    imageAlt: "Unique Job Services",
+    image: "/ujs.png", // Requires user to put ujs.png in public folder
     colorClass: "from-blue-500 to-cyan-500",
   },
   {
@@ -17,7 +18,8 @@ const projects = [
     category: "Hardware & SaaS",
     desc: "Real-time biometric attendance tracker with fingerprint scanning, synced to a custom HR cloud dashboard for workforce visibility.",
     link: "https://uniquejob.ca/ui/",
-    imageAlt: "Biometric & Dashboard",
+    imageAlt: "Smart Attendance",
+    image: "/biometric.png", // Requires user to put biometric.png in public folder
     colorClass: "from-purple-500 to-indigo-500",
   },
   {
@@ -26,6 +28,7 @@ const projects = [
     desc: "Integrated state-of-the-art TTS models for on-demand audio generation with 95% voice accuracy for content creators.",
     link: "#",
     imageAlt: "AI Voice",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-pink-500 to-red-500",
   },
   {
@@ -34,6 +37,7 @@ const projects = [
     desc: "Scalable online store handling thousands of daily orders with real-time inventory and Stripe payment integration.",
     link: "#",
     imageAlt: "eCommerce",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-green-500 to-emerald-500",
   },
   {
@@ -42,6 +46,7 @@ const projects = [
     desc: "Centralized inventory dashboard with barcode scanning, reducing stock discrepancies by 90% and speeding up fulfillment.",
     link: "#",
     imageAlt: "Inventory",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-yellow-500 to-orange-500",
   },
   {
@@ -50,6 +55,7 @@ const projects = [
     desc: "Real-time seat booking system with QR code ticketing, route management, and a comprehensive admin analytics dashboard.",
     link: "#",
     imageAlt: "Bus Ticketing",
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5f5a?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-indigo-500 to-blue-500",
   }
 ];
@@ -92,17 +98,17 @@ export default function Work() {
               {/* Image Area */}
               <div className="relative w-full h-52 bg-[#0a0f1c] border-b border-white/5 overflow-hidden flex items-center justify-center">
                 
-                {/* ---> USER: ADD YOUR IMAGES HERE <--- */}
-                {/* Example: Replace the text inside this div with an <img src="..." /> tag */}
-                <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <p className="text-white/20 text-xs font-semibold uppercase tracking-wider text-center border border-white/10 px-3 py-1.5 rounded bg-white/5">
-                    Add {project.imageAlt} Image
-                  </p>
-                </div>
+                {/* Dynamically load the image */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src={project.image} 
+                  alt={project.imageAlt} 
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" 
+                />
 
                 {/* Hover Overlay for Live Links */}
                 {project.link !== "#" && (
-                  <div className="absolute inset-0 bg-[#020408]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm z-20">
+                  <div className="absolute inset-0 bg-[#020408]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm z-20">
                     <a 
                       href={project.link} 
                       target="_blank" 
