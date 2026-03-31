@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, ArrowUpRight } from "lucide-react";
+import { Mail, ArrowUpRight, Globe } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const links = [
@@ -84,6 +84,15 @@ export default function Footer() {
               >
                 <FaGithub size={14} />
                 github.com/umarfarooq57
+              </a>
+              <a
+                href="https://farooxium.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/40 hover:text-white transition-colors flex items-center gap-2"
+              >
+                <Globe size={14} />
+                farooxium.dev
               </a>
             </div>
           </div>
