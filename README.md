@@ -19,4 +19,4 @@ React Next.js TypeScript Tailwind CSS Vercel
 📬 Contact
 
 📧 umarfarooq5743@gmail.com
-💼 linkedin.com/in/umar-farooq57
+💼 **linkedin.com/in/umar-farooq57**
