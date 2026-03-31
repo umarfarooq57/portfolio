@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants, type Easing } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import {
@@ -57,16 +57,18 @@ const services = [
   },
 ];
 
-const containerVariants = {
+const easeOut: Easing = "easeOut";
+
+const containerVariants: Variants = {
   hidden: {},
   show: {
     transition: { staggerChildren: 0.12 },
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } },
 };
 
 export default function Services() {

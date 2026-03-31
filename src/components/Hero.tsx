@@ -1,15 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants, type Easing } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Play } from "lucide-react";
 
-const fadeUp = {
+const easeOut: Easing = "easeOut";
+
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15 + 2.4, duration: 0.7, ease: "easeOut" },
+    transition: { delay: i * 0.15 + 2.4, duration: 0.7, ease: easeOut },
   }),
 };
 

@@ -15,7 +15,6 @@ import {
   SiRedis,
   SiDocker,
   SiGithubactions,
-  SiAmazonaws,
   SiLinux,
   SiTensorflow,
   SiPytorch,
