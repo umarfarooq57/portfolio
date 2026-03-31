@@ -28,7 +28,7 @@ const projects = [
     desc: "Integrated state-of-the-art TTS models for on-demand audio generation with 95% voice accuracy for content creators.",
     link: "#",
     imageAlt: "AI Voice",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1614064641913-6b71fe0cb5c7?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-pink-500 to-red-500",
   },
   {
@@ -37,7 +37,7 @@ const projects = [
     desc: "Scalable online store handling thousands of daily orders with real-time inventory and Stripe payment integration.",
     link: "#",
     imageAlt: "eCommerce",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-green-500 to-emerald-500",
   },
   {
@@ -46,7 +46,7 @@ const projects = [
     desc: "Centralized inventory dashboard with barcode scanning, reducing stock discrepancies by 90% and speeding up fulfillment.",
     link: "#",
     imageAlt: "Inventory",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-yellow-500 to-orange-500",
   },
   {
@@ -55,7 +55,7 @@ const projects = [
     desc: "Real-time seat booking system with QR code ticketing, route management, and a comprehensive admin analytics dashboard.",
     link: "#",
     imageAlt: "Bus Ticketing",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5f5a?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-indigo-500 to-blue-500",
   }
 ];
