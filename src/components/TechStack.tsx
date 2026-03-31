@@ -24,9 +24,9 @@ import { FaBrain, FaAws } from "react-icons/fa";
 
 const techCategories = [
   {
-    label: "Frontend",
+    label: "Frontend Development",
     color: "from-blue-500 to-cyan-400",
-    borderColor: "rgba(59,130,246,0.3)",
+    shadow: "shadow-[0_0_30px_rgba(59,130,246,0.15)]",
     items: [
       { name: "React", Icon: SiReact, color: "#61DAFB" },
       { name: "Next.js", Icon: SiNextdotjs, color: "#ffffff" },
@@ -35,9 +35,9 @@ const techCategories = [
     ],
   },
   {
-    label: "Backend",
+    label: "Backend Platform",
     color: "from-purple-500 to-indigo-400",
-    borderColor: "rgba(139,92,246,0.3)",
+    shadow: "shadow-[0_0_30px_rgba(139,92,246,0.15)]",
     items: [
       { name: "Python", Icon: SiPython, color: "#3776AB" },
       { name: "FastAPI", Icon: SiFastapi, color: "#009688" },
@@ -45,35 +45,35 @@ const techCategories = [
     ],
   },
   {
-    label: "Database",
+    label: "Database & Cache",
     color: "from-orange-500 to-yellow-400",
-    borderColor: "rgba(245,158,11,0.3)",
+    shadow: "shadow-[0_0_30px_rgba(245,158,11,0.15)]",
     items: [
-      { name: "MySQL", Icon: SiMysql, color: "#4479A1" },
       { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1" },
+      { name: "MySQL", Icon: SiMysql, color: "#4479A1" },
       { name: "MongoDB", Icon: SiMongodb, color: "#47A248" },
       { name: "Redis", Icon: SiRedis, color: "#DC382D" },
     ],
   },
   {
-    label: "DevOps",
+    label: "Cloud & DevOps",
     color: "from-green-500 to-emerald-400",
-    borderColor: "rgba(16,185,129,0.3)",
+    shadow: "shadow-[0_0_30px_rgba(16,185,129,0.15)]",
     items: [
+      { name: "AWS", Icon: FaAws, color: "#FF9900" },
       { name: "Docker", Icon: SiDocker, color: "#2496ED" },
       { name: "CI/CD", Icon: SiGithubactions, color: "#2088FF" },
-      { name: "AWS Cloud", Icon: FaAws, color: "#FF9900" },
       { name: "Linux", Icon: SiLinux, color: "#FCC624" },
     ],
   },
   {
-    label: "AI / ML",
+    label: "AI & Machine Learning",
     color: "from-pink-500 to-rose-400",
-    borderColor: "rgba(236,72,153,0.3)",
+    shadow: "shadow-[0_0_30px_rgba(236,72,153,0.15)]",
     items: [
+      { name: "OpenAI", Icon: SiOpenai, color: "#ffffff" },
       { name: "TensorFlow", Icon: SiTensorflow, color: "#FF6F00" },
       { name: "PyTorch", Icon: SiPytorch, color: "#EE4C2C" },
-      { name: "OpenAI", Icon: SiOpenai, color: "#ffffff" },
       { name: "LangChain", Icon: FaBrain, color: "#32CD32" },
     ],
   },
@@ -83,7 +83,7 @@ export default function TechStack() {
   return (
     <section id="techstack" className="relative py-28 overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-20" />
-      <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] orb-cyan rounded-full opacity-10" />
+      <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] orb-cyan rounded-full opacity-10 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
@@ -99,52 +99,52 @@ export default function TechStack() {
             Built With <span className="text-gradient">Industry-Leading</span> Tech
           </h2>
           <p className="text-white/40 max-w-xl mx-auto">
-            We use the best-in-class tools across every layer of the stack.
+            We use the best-in-class tools across every layer of the stack to ensure scalability, security, and performance.
           </p>
         </motion.div>
 
-        {/* Tech grid */}
-        <div className="flex flex-col gap-5">
+        {/* Tech grid - Modern Masonry / Card Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
           {techCategories.map((cat, ci) => (
             <motion.div
               key={cat.label}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: ci * 0.1 }}
-              className="glass-card p-6"
+              className={`glass-card p-8 flex flex-col gap-6 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 ${cat.shadow} ${
+                // Make the last row span 2 columns nicely if there are 5 elements (3 top, 2 bottom)
+                ci === 3 ? "lg:col-span-1 lg:col-start-1" : ""
+              } ${
+                ci === 4 ? "lg:col-span-2" : ""
+              }`}
             >
-              <div className="flex items-center gap-6 flex-col sm:flex-row">
-                {/* Category label */}
-                <div className="shrink-0 w-28">
-                  <span
-                    className={`text-sm font-bold bg-linear-to-r ${cat.color} bg-clip-text`}
-                    style={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
-                  >
-                    {cat.label}
-                  </span>
-                  <div className={`mt-1.5 h-[2px] w-8 bg-linear-to-r ${cat.color} rounded-full`} />
-                </div>
+              {/* Category Header */}
+              <div className="flex items-center gap-4 border-b border-white/5 pb-4">
+                <div className={`w-3 h-3 rounded-full bg-linear-to-br ${cat.color} opacity-80`} />
+                <h3 className="text-xl font-bold text-white font-poppins tracking-wide">
+                  {cat.label}
+                </h3>
+              </div>
 
-                {/* Items */}
-                <div className="flex flex-wrap gap-3">
-                  {cat.items.map(({ name, Icon, color }) => (
-                    <motion.div
-                      key={name}
-                      whileHover={{ scale: 1.08, y: -3 }}
-                      className="tech-badge flex items-center gap-2.5 px-4 py-2.5 rounded-xl cursor-default group"
-                    >
-                      <Icon
-                        size={20}
-                        style={{ color }}
-                        className="shrink-0 group-hover:scale-110 transition-transform duration-200"
-                      />
-                      <span className="text-sm font-semibold text-white/70 group-hover:text-white transition-colors duration-200">
-                        {name}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
+              {/* Items Grid Layout inside Card */}
+              <div className="grid grid-cols-2 gap-3 flex-1">
+                {cat.items.map(({ name, Icon, color }) => (
+                  <motion.div
+                    key={name}
+                    whileHover={{ scale: 1.05 }}
+                    className="tech-badge flex items-center justify-start gap-3 px-4 py-3 rounded-xl cursor-default group border border-white/5 bg-white/5 hover:bg-white/10 transition-colors"
+                  >
+                    <Icon
+                      size={18}
+                      style={{ color }}
+                      className="shrink-0 group-hover:scale-110 transition-transform duration-200 opacity-90 group-hover:opacity-100"
+                    />
+                    <span className="text-sm font-semibold text-white/70 group-hover:text-white transition-colors duration-200">
+                      {name}
+                    </span>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           ))}
