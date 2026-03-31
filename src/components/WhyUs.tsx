@@ -55,8 +55,8 @@ export default function WhyUs() {
               <span className="text-gradient">We Engineer Solutions</span>
             </h2>
             <p className="text-white/40 text-lg leading-relaxed mb-8">
-              Kalivox combines technical depth with a business-first mindset. We're not just
-              developers — we're strategic partners invested in your success.
+              Kalivox combines technical depth with a business-first mindset. We&apos;re not just
+              developers — we&apos;re strategic partners invested in your success.
             </p>
 
             {/* Small proof points */}
