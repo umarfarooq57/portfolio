@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Send, CheckCircle2 } from "lucide-react";
+import { Mail, Send, CheckCircle2, Globe } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 export default function Contact() {
@@ -110,6 +110,21 @@ export default function Contact() {
                 <div>
                   <p className="text-xs text-white/30 mb-0.5">GitHub</p>
                   <p className="text-sm font-medium">github.com/umarfarooq57</p>
+                </div>
+              </a>
+
+              <a
+                href="https://farooxium.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 text-white/60 hover:text-white transition-colors group"
+              >
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
+                  <Globe size={18} className="text-white/70" />
+                </div>
+                <div>
+                  <p className="text-xs text-white/30 mb-0.5">Website</p>
+                  <p className="text-sm font-medium">farooxium.dev</p>
                 </div>
               </a>
             </div>

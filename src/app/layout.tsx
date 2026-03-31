@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "@/components/CustomCursor";
 
 // Triggering redeploy with env variables update
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -38,7 +37,6 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${poppins.variable} bg-[#020408] text-white antialiased`}
       >
-        <CustomCursor />
         {children}
       </body>
     </html>
