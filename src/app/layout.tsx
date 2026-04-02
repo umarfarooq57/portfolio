@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   },
 };
 
+import ChatWidget from "@/components/ChatWidget";
+
 export default function RootLayout({
   children,
 }: {
@@ -38,6 +40,7 @@ export default function RootLayout({
         className={`${inter.variable} ${poppins.variable} bg-[#020408] text-white antialiased`}
       >
         {children}
+        <ChatWidget />
       </body>
     </html>
   );
