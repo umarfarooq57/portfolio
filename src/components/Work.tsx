@@ -28,7 +28,7 @@ const projects = [
     desc: "Integrated state-of-the-art TTS models for on-demand audio generation with 95% voice accuracy for content creators.",
     link: "#",
     imageAlt: "AI Voice",
-    image: "/voice.png",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-pink-500 to-red-500",
   },
   {
