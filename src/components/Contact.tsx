@@ -114,7 +114,7 @@ export default function Contact() {
               </a>
 
               <a
-                href="https://farooxium.dev/"
+                href="https://umarcraft.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 text-white/60 hover:text-white transition-colors group"
@@ -124,7 +124,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-xs text-white/30 mb-0.5">Website</p>
-                  <p className="text-sm font-medium">farooxium.dev</p>
+                  <p className="text-sm font-medium">umarcraft.com</p>
                 </div>
               </a>
             </div>

@@ -65,7 +65,7 @@ export default function Hero() {
           initial="hidden"
           animate="show"
           custom={1}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight font-poppins mb-6"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight font-poppins mb-6 whitespace-normal overflow-wrap-anywhere"
         >
           <span className="text-white">UmarCraft</span>
           <br />

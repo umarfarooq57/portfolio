@@ -81,7 +81,7 @@ const techCategories = [
 
 export default function TechStack() {
   return (
-    <section id="techstack" className="relative py-28 overflow-hidden">
+    <section id="techstack" className="relative py-20 lg:py-32 overflow-hidden bg-[#040712]">
       <div className="absolute inset-0 grid-bg opacity-20" />
       <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] orb-cyan rounded-full opacity-10 pointer-events-none" />
 
@@ -128,19 +128,19 @@ export default function TechStack() {
               </div>
 
               {/* Items Grid Layout inside Card */}
-              <div className="grid grid-cols-2 gap-3 flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1">
                 {cat.items.map(({ name, Icon, color }) => (
                   <motion.div
                     key={name}
                     whileHover={{ scale: 1.05 }}
-                    className="tech-badge flex items-center justify-start gap-3 px-4 py-3 rounded-xl cursor-default group border border-white/5 bg-white/5 hover:bg-white/10 transition-colors"
+                    className="tech-badge flex items-center justify-start gap-2.5 px-3 py-2.5 rounded-xl cursor-default group border border-white/5 bg-white/5 hover:bg-white/10 transition-colors"
                   >
                     <Icon
-                      size={18}
+                      size={16}
                       style={{ color }}
                       className="shrink-0 group-hover:scale-110 transition-transform duration-200 opacity-90 group-hover:opacity-100"
                     />
-                    <span className="text-sm font-semibold text-white/70 group-hover:text-white transition-colors duration-200">
+                    <span className="text-[13px] font-semibold text-white/70 group-hover:text-white transition-colors duration-200 leading-tight">
                       {name}
                     </span>
                   </motion.div>

@@ -76,7 +76,7 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="relative py-28 overflow-hidden">
+    <section id="services" className="relative py-20 lg:py-32 overflow-hidden">
       {/* Glow background */}
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] orb-blue rounded-full opacity-20" />

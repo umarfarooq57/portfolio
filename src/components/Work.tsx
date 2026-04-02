@@ -62,7 +62,7 @@ const projects = [
 
 export default function Work() {
   return (
-    <section id="work" className="relative py-28 overflow-hidden">
+    <section id="work" className="relative py-20 pt-24 overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-20" />
       <div className="absolute top-1/2 right-0 w-[600px] h-[600px] orb-purple rounded-full opacity-10 pointer-events-none" />
 
@@ -96,15 +96,18 @@ export default function Work() {
               className="glass-card flex flex-col group overflow-hidden hover:border-white/20 hover:-translate-y-1 transition-all duration-300"
             >
               {/* Image Area */}
-              <div className="relative w-full h-52 bg-[#0a0f1c] border-b border-white/5 overflow-hidden flex items-center justify-center">
+              <div className="relative w-full aspect-video sm:h-52 bg-[#0a0f1c] border-b border-white/5 overflow-hidden flex items-center justify-center">
                 
                 {/* Dynamically load the image */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src={project.image} 
                   alt={project.imageAlt} 
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" 
+                  className="w-full h-full object-contain filter group-hover:brightness-110 transition-all duration-300 relative z-10" 
                 />
+                <div className="absolute inset-0 bg-[#020408]/40" />
+                <div className="absolute inset-0 opacity-20 blur-2xl" 
+                     style={{ backgroundImage: `url(${project.image})`, backgroundSize: 'cover' }} />
 
                 {/* Hover Overlay for Live Links */}
                 {project.link !== "#" && (
