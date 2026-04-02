@@ -65,9 +65,9 @@ export default function Hero() {
           initial="hidden"
           animate="show"
           custom={1}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight font-poppins mb-6"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight font-poppins mb-6"
         >
-          <span className="text-white">UmarDev</span>
+          <span className="text-white">UmarCraft</span>
           <br />
           <span className="text-gradient">Complete Digital</span>
           <br />

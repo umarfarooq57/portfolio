@@ -58,7 +58,7 @@ export default function Loader() {
               className="text-center"
             >
               <h1 className="text-2xl font-black tracking-[0.15em] text-gradient font-poppins uppercase">
-                UmarDev
+                UmarCraft
               </h1>
               <p className="text-xs text-white/40 tracking-widest mt-1 uppercase">
                 Loading Experience

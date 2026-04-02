@@ -11,13 +11,13 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "UmarDev — Complete Digital & Automation Solutions",
+  title: "UmarCraft — Complete Digital & Automation Solutions",
   description:
-    "UmarDev is a full-service technology company providing end-to-end web development, mobile apps, AI/ML, DevOps, and automation solutions for modern businesses.",
+    "UmarCraft is a full-service technology company providing end-to-end web development, mobile apps, AI/ML, DevOps, and automation solutions for modern businesses.",
   keywords:
-    "web development, mobile apps, AI, machine learning, DevOps, automation, cloud, UmarDev",
+    "web development, mobile apps, AI, machine learning, DevOps, automation, cloud, UmarCraft",
   openGraph: {
-    title: "UmarDev — Complete Digital & Automation Solutions",
+    title: "UmarCraft — Complete Digital & Automation Solutions",
     description:
       "We build scalable web, mobile, AI, and DevOps systems for modern businesses.",
     type: "website",

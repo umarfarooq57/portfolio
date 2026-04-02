@@ -21,14 +21,14 @@ export async function POST(req: NextRequest) {
     });
 
     await transporter.sendMail({
-      from: `"UmarDev Contact" <${process.env.GMAIL_USER}>`,
+      from: `"UmarCraft Contact" <${process.env.GMAIL_USER}>`,
       to: process.env.CONTACT_RECEIVER,
       replyTo: email,
-      subject: subject ? `[UmarDev] ${subject}` : `[UmarDev] New Contact from ${name}`,
+      subject: subject ? `[UmarCraft] ${subject}` : `[UmarCraft] New Contact from ${name}`,
       html: `
         <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; background: #020408; color: #fff; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08);">
           <div style="background: linear-gradient(135deg, #1d4ed8, #7c3aed); padding: 32px; text-align: center;">
-            <h1 style="margin: 0; font-size: 28px; font-weight: 900; letter-spacing: 2px;">UMARDEV</h1>
+            <h1 style="margin: 0; font-size: 28px; font-weight: 900; letter-spacing: 2px;">UMARCRAFT</h1>
             <p style="margin: 8px 0 0; opacity: 0.8; font-size: 13px;">New Contact Form Submission</p>
           </div>
           <div style="padding: 32px;">
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
             </table>
           </div>
           <div style="padding: 20px 32px; background: rgba(255,255,255,0.02); text-align: center; font-size: 12px; color: rgba(255,255,255,0.25); border-top: 1px solid rgba(255,255,255,0.05);">
-            UmarDev — Complete Digital & Automation Solutions
+            UmarCraft — Complete Digital & Automation Solutions
           </div>
         </div>
       `,

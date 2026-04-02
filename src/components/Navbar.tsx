@@ -36,13 +36,14 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="#hero" className="flex items-center gap-3 group">
           <div
-            className="w-9 h-9 rounded-xl flex items-center justify-center group-hover:glow-blue transition-all duration-300"
-            style={{ background: "linear-gradient(135deg, #1d4ed8, #7c3aed)" }}
+            className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:glow-blue hover:scale-105 transition-all duration-300 relative overflow-hidden shadow-[0_0_15px_rgba(124,58,237,0.3)] border border-white/10"
+            style={{ background: "linear-gradient(135deg, #0f172a, #1e1b4b)" }}
           >
-            <span className="text-white font-black text-base font-poppins">U</span>
+            <div className="absolute inset-0 bg-linear-to-br from-blue-500/20 to-purple-500/20 opacity-50 group-hover:opacity-100 transition-opacity" />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400 font-black text-lg tracking-tighter drop-shadow-md z-10 font-poppins">UC</span>
           </div>
-          <span className="text-white font-black text-lg tracking-wide font-poppins">
-            Umar<span className="text-gradient-blue">Dev</span>
+          <span className="text-white font-black text-xl tracking-wide font-poppins">
+            Umar<span className="text-gradient-blue">Craft</span>
           </span>
         </Link>
 
