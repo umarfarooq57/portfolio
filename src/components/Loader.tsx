@@ -34,9 +34,12 @@ export default function Loader() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="relative"
             >
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center glow-blue"
-                style={{ background: "linear-gradient(135deg, #1d4ed8, #7c3aed)" }}>
-                <span className="text-white font-black text-3xl font-poppins">K</span>
+              <div 
+                className="w-20 h-20 rounded-2xl flex items-center justify-center relative overflow-hidden shadow-[0_0_30px_rgba(124,58,237,0.4)] border border-white/10 backdrop-blur-xl"
+                style={{ background: "linear-gradient(135deg, #0f172a, #1e1b4b)" }}
+              >
+                <div className="absolute inset-0 bg-linear-to-br from-blue-500/20 to-purple-500/20 opacity-60 animate-pulse" />
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400 font-black text-4xl tracking-tighter drop-shadow-lg z-10 font-poppins">UC</span>
               </div>
               {/* Rotating ring */}
               <motion.div
