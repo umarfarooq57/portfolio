@@ -101,7 +101,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/25">
-            © {new Date().getFullYear()} Kalivox. All rights reserved.
+            © {new Date().getFullYear()} UmarDev. All rights reserved.
           </p>
           <p className="text-xs text-white/25">
             Engineered with precision. Built for scale.

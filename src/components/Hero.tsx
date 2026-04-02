@@ -67,7 +67,7 @@ export default function Hero() {
           custom={1}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight font-poppins mb-6"
         >
-          <span className="text-white">Kalivox</span>
+          <span className="text-white">UmarDev</span>
           <br />
           <span className="text-gradient">Complete Digital</span>
           <br />

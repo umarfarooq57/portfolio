@@ -39,10 +39,10 @@ export default function Navbar() {
             className="w-9 h-9 rounded-xl flex items-center justify-center group-hover:glow-blue transition-all duration-300"
             style={{ background: "linear-gradient(135deg, #1d4ed8, #7c3aed)" }}
           >
-            <span className="text-white font-black text-base font-poppins">K</span>
+            <span className="text-white font-black text-base font-poppins">U</span>
           </div>
           <span className="text-white font-black text-lg tracking-wide font-poppins">
-            Kali<span className="text-gradient-blue">vox</span>
+            Umar<span className="text-gradient-blue">Dev</span>
           </span>
         </Link>
 
