@@ -2,28 +2,49 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, User, Bot, CheckCircle2, Phone, Mail, ExternalLink, Sparkles, X, Globe, Smartphone, Coffee, Layout, Plus, Check } from "lucide-react";
+import { 
+  Send, Bot, CheckCircle2, Phone, Mail, ExternalLink, 
+  Sparkles, X, Globe, Smartphone, Coffee, Layout, 
+  Plus, Check, Trash2, Maximize2, Sparkle
+} from "lucide-react";
 
 interface Message {
   id: string;
   type: "bot" | "user";
   text: string;
   trigger?: string;
+  timestamp?: string;
 }
 
 export default function ChatWidget({ onClose }: { onClose: () => void }) {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      type: "bot",
-      text: "Welcome to UmarDev! I'm your digital project consultant. I can help you build your vision from the ground up. What can I build for you today? [SHOW_SERVICES]",
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Initialize and load history
+  useEffect(() => {
+    const saved = localStorage.getItem("umardev_chat_history");
+    if (saved) {
+      setMessages(JSON.parse(saved));
+    } else {
+      setMessages([
+        {
+          id: "1",
+          type: "bot",
+          text: "Hey there! 👋 Welcome to UmarDev. I'm here to help you explore what we build, book a call, or send us a message. [SHOW_SERVICES]",
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        },
+      ]);
+    }
+  }, []);
+
+  // Save history on changes
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem("umardev_chat_history", JSON.stringify(messages));
+    }
+  }, [messages]);
 
   // Parse triggers from text
   const parseTrigger = (text: string) => {
@@ -41,14 +62,6 @@ export default function ChatWidget({ onClose }: { onClose: () => void }) {
     return { cleanText, foundTrigger };
   };
 
-  // Initial parse for the first message
-  useEffect(() => {
-    const { cleanText, foundTrigger } = parseTrigger(messages[0].text);
-    if (foundTrigger) {
-      setMessages([{ ...messages[0], text: cleanText, trigger: foundTrigger }]);
-    }
-  }, []);
-
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({
@@ -61,13 +74,14 @@ export default function ChatWidget({ onClose }: { onClose: () => void }) {
   const handleSendMessage = async (text: string, isFromButton = false) => {
     if (!text.trim() || (isTyping && !isFromButton)) return;
 
-    // Clear triger from previous message for UI cleanliness
+    // Clear trigger from previous message for UI cleanliness
     setMessages(prev => prev.map(m => ({ ...m, trigger: undefined })));
 
     const userMsg: Message = {
       id: Math.random().toString(36).substr(2, 9),
       type: "user",
       text: text,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
     
     setMessages((prev) => [...prev, userMsg]);
@@ -90,33 +104,32 @@ export default function ChatWidget({ onClose }: { onClose: () => void }) {
           type: "bot",
           text: cleanText,
           trigger: foundTrigger || undefined,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         };
         setMessages((prev) => [...prev, botMsg]);
-
-        // If it's a confirmation trigger, we handle it specially if needed
-        if (foundTrigger === "[SHOW_CONFIRMATION]") {
-            // Potential for a "Submit" button
-        }
       }
     } catch (error) {
       console.error(error);
       setMessages((prev) => [...prev, {
         id: "error",
         type: "bot",
-        text: "I'm having trouble connecting. Please try again or message Umar on WhatsApp directly!",
+        text: "I'm having trouble connecting to my brain right now. Please try again or email umarfarooq5743@gmail.com directly!",
       }]);
     } finally {
       setIsTyping(false);
     }
   };
 
-  const handleManualBooking = async () => {
-    setIsSubmitting(true);
-    // In a more complex version, we'd extract data from the chat history here
-    // For now, we'll tell the AI that the user wants to confirm
-    await handleSendMessage("I confirm my booking. Please submit it.", true);
-    setIsSubmitting(false);
-    setIsCompleted(true);
+  const clearChat = () => {
+    localStorage.removeItem("umardev_chat_history");
+    setMessages([
+      {
+        id: "1",
+        type: "bot",
+        text: "Hey there! 👋 Welcome to UmarDev. I'm here to help you explore what we build, book a call, or send us a message. [SHOW_SERVICES]",
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      },
+    ]);
   };
 
   const openWhatsApp = () => {
@@ -124,128 +137,113 @@ export default function ChatWidget({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="w-full max-w-[450px] h-[85vh] max-h-[750px] pb-4 glass-card-strong shadow-[0_32px_100px_-16px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden border border-white/20 rounded-[32px] relative z-[99999] backdrop-blur-[40px]">
-      {/* Premium Header */}
-      <div className="p-6 bg-linear-to-br from-blue-600/30 via-indigo-600/20 to-transparent border-b border-white/10 flex items-center justify-between">
+    <div className="w-full max-w-[440px] h-[85vh] max-h-[750px] glass-card-strong shadow-[0_32px_100px_-16px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden border border-white/20 rounded-[32px] relative z-[99999] backdrop-blur-[40px] bg-[#0D0F16]/95">
+      {/* Header Overhaul (UmarDev AI) */}
+      <div className="p-5 bg-linear-to-b from-white/10 to-transparent border-b border-white/10 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="relative">
-            <div className="w-12 h-12 rounded-2xl bg-linear-to-tr from-blue-500 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.5)] border border-white/20">
+            <div className="w-12 h-12 rounded-full bg-linear-to-tr from-blue-500 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.5)] border border-white/20">
               <Sparkles size={24} className="text-white brightness-125" />
             </div>
-            <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-green-500 border-2 border-[#020408] animate-pulse-glow" />
+            <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-[#0D0F16]" />
           </div>
           <div>
-            <h3 className="text-lg font-black text-white font-poppins tracking-tight uppercase leading-tight">UmarDev Assistant</h3>
-            <div className="flex items-center gap-2">
-              <p className="text-[9px] text-white/40 uppercase tracking-[3px] font-bold">Smart Agent AI</p>
-            </div>
+            <h3 className="text-lg font-black text-white font-poppins tracking-tight flex items-center gap-2">
+              UmarDev AI 
+              <span className="text-[10px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded-full border border-indigo-500/30 font-bold uppercase tracking-widest">AI</span>
+            </h3>
+            <p className="text-[11px] text-white/40 font-semibold tracking-wide">Ready to help</p>
           </div>
         </div>
-        <button 
-          onClick={onClose} 
-          className="w-10 h-10 flex items-center justify-center hover:bg-white/10 rounded-2xl transition-all text-white/40 hover:text-white"
-        >
-          <X size={20} />
-        </button>
+        <div className="flex items-center gap-2">
+          <button onClick={clearChat} className="p-2.5 hover:bg-white/5 rounded-xl transition-all text-white/30 hover:text-white group">
+            <Trash2 size={18} />
+          </button>
+          <button className="p-2.5 hover:bg-white/5 rounded-xl transition-all text-white/30 hover:text-white hidden sm:flex">
+            <Maximize2 size={18} />
+          </button>
+          <button 
+            onClick={onClose} 
+            className="p-2.5 hover:bg-white/5 rounded-xl transition-all text-white/30 hover:text-white"
+          >
+            <X size={18} />
+          </button>
+        </div>
       </div>
 
       {/* Chat Area */}
       <div 
         ref={scrollRef} 
-        className="flex-1 overflow-y-auto p-6 flex flex-col gap-8 scroll-smooth"
+        className="flex-1 overflow-y-auto p-5 md:p-6 flex flex-col gap-8 scroll-smooth"
       >
         <AnimatePresence initial={false}>
-          {messages.map((msg) => (
-            <div key={msg.id} className="flex flex-col gap-6">
+          {messages.map((msg, idx) => (
+            <div key={msg.id} className="flex flex-col gap-4">
               <motion.div 
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`flex flex-col ${msg.type === "user" ? "items-end" : "items-start"}`}
+                className={`flex gap-3 ${msg.type === "user" ? "flex-row-reverse" : "flex-row"}`}
               >
-                <div className={`max-w-[88%] p-5 rounded-[24px] text-sm leading-relaxed shadow-lg font-medium border ${
-                  msg.type === "user" 
-                    ? "bg-linear-to-tr from-blue-600 to-indigo-700 text-white rounded-tr-none border-white/10" 
-                    : "bg-white/5 border-white/10 text-white/90 rounded-tl-none backdrop-blur-md"
-                }`}>
-                  {msg.text}
+                {msg.type === "bot" && (
+                  <div className="w-8 h-8 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center shrink-0 mt-1">
+                    <Bot size={16} className="text-blue-400" />
+                  </div>
+                )}
+                <div className={`flex flex-col ${msg.type === "user" ? "items-end" : "items-start"} max-w-[82%]`}>
+                  <div className={`p-4 rounded-[22px] text-sm leading-relaxed border ${
+                    msg.type === "user" 
+                      ? "bg-linear-to-tr from-blue-600 to-indigo-700 text-white rounded-tr-none border-white/10" 
+                      : "bg-[#1A1D26] border-white/10 text-white/90 rounded-tl-none"
+                  }`}>
+                    {msg.text}
+                  </div>
+                  {msg.timestamp && (
+                    <span className="text-[10px] text-white/20 mt-1.5 font-bold uppercase tracking-wider">{msg.timestamp}</span>
+                  )}
                 </div>
               </motion.div>
 
-              {/* Interactive Triggers */}
+              {/* Interactive Buttons (Farooxium Style) */}
               {msg.trigger && !isTyping && (
                 <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex flex-col gap-3 px-2"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col gap-2.5 px-11"
                 >
                     {msg.trigger === "[SHOW_SERVICES]" && (
-                        <div className="grid grid-cols-1 gap-3">
+                        <>
                             {[
-                                { name: "Web Development", icon: <Globe size={18} /> },
-                                { name: "Mobile App", icon: <Smartphone size={18} /> },
-                                { name: "AI & Automation", icon: <Coffee size={18} /> },
-                                { name: "UI/UX Design", icon: <Layout size={18} /> },
-                                { name: "Other", icon: <Plus size={18} /> },
+                                "What services does UmarDev offer?",
+                                "📅 Book a free consultation",
+                                "📩 Send a message",
+                                "Can I see some past projects?"
                             ].map((opt) => (
                                 <motion.button
-                                    key={opt.name}
-                                    whileHover={{ scale: 1.02, backgroundColor: "rgba(59, 130, 246, 0.15)", borderColor: "rgba(59, 130, 246, 0.4)" }}
+                                    key={opt}
+                                    whileHover={{ scale: 1.02, backgroundColor: "rgba(255, 255, 255, 0.05)" }}
                                     whileTap={{ scale: 0.98 }}
-                                    onClick={() => handleSendMessage(opt.name, true)}
-                                    className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 text-white/80 transition-all text-left"
+                                    onClick={() => handleSendMessage(opt, true)}
+                                    className="w-full p-3.5 rounded-2xl bg-white/3 border border-white/8 text-blue-400 hover:text-white transition-all text-left text-[13px] font-medium"
                                 >
-                                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-blue-400 group-hover:text-white transition-colors">
-                                        {opt.icon}
-                                    </div>
-                                    <span className="font-bold text-xs uppercase tracking-widest">{opt.name}</span>
+                                    {opt}
                                 </motion.button>
                             ))}
-                        </div>
+                        </>
                     )}
 
                     {msg.trigger === "[SHOW_BUDGETS]" && (
-                        <div className="flex flex-wrap gap-2 justify-center">
+                        <div className="flex flex-wrap gap-2">
                             {["Under $500", "$500 - $1.5k", "$1.5k - $5k", "$5k+", "Let's Discuss"].map(opt => (
                                 <motion.button
                                     key={opt}
-                                    whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.2)" }}
-                                    whileTap={{ scale: 0.95 }}
+                                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.05)" }}
                                     onClick={() => handleSendMessage(opt, true)}
-                                    className="px-5 py-3 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest transition-all"
+                                    className="px-4 py-2.5 rounded-full bg-white/3 border border-white/8 text-xs font-bold text-blue-400 hover:text-white transition-all"
                                 >
                                     {opt}
                                 </motion.button>
                             ))}
                         </div>
-                    )}
-
-                    {msg.trigger === "[SHOW_TIMELINE]" && (
-                        <div className="grid grid-cols-2 gap-2">
-                             {["ASAP", "1 Month", "2-3 Months", "Flexible"].map(opt => (
-                                <motion.button
-                                    key={opt}
-                                    whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.15)" }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => handleSendMessage(opt, true)}
-                                    className="p-3 rounded-xl bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest text-center"
-                                >
-                                    {opt}
-                                </motion.button>
-                            ))}
-                        </div>
-                    )}
-
-                    {msg.trigger === "[SHOW_CONFIRMATION]" && !isCompleted && (
-                        <motion.button
-                            initial={{ scale: 0.9 }}
-                            animate={{ scale: 1 }}
-                            whileHover={{ scale: 1.05, shadow: "0 0 30px rgba(59, 130, 246, 0.4)" }}
-                            onClick={handleManualBooking}
-                            className="w-full py-5 rounded-2xl bg-linear-to-r from-blue-600 to-indigo-700 text-white font-black uppercase tracking-[4px] text-xs shadow-xl active:scale-95 transition-all flex items-center justify-center gap-3"
-                        >
-                            {isSubmitting ? "Finalizing..." : "Submit Booking Now"}
-                            {!isSubmitting && <CheckCircle2 size={18} />}
-                        </motion.button>
                     )}
                 </motion.div>
               )}
@@ -255,72 +253,46 @@ export default function ChatWidget({ onClose }: { onClose: () => void }) {
 
         {isTyping && (
           <div className="flex items-center gap-3 text-white/20">
-            <div className="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center animate-pulse">
-              <Bot size={20} />
+            <div className="w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center animate-pulse">
+              <Bot size={16} />
             </div>
-            <div className="flex gap-2 p-4 bg-white/5 rounded-2xl rounded-tl-none border border-white/10 backdrop-blur-md">
-              <span className="w-2 h-2 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
-              <span className="w-2 h-2 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.15s]" />
-              <span className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" />
+            <div className="flex gap-1.5 p-3 bg-white/5 rounded-2xl rounded-tl-none border border-white/10">
+              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce [animation-delay:-0.3s]" />
+              <span className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce [animation-delay:-0.15s]" />
+              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-bounce" />
             </div>
           </div>
         )}
-
-        {isCompleted && (
-            <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center gap-6 py-10 text-center"
-            >
-                <div className="relative">
-                    <div className="w-24 h-24 rounded-[32px] bg-green-500/10 border border-green-500/30 flex items-center justify-center">
-                        <Check size={48} className="text-green-400" />
-                    </div>
-                </div>
-                <div>
-                    <h4 className="text-2xl font-black text-white mb-2 uppercase tracking-tighter">Request Received</h4>
-                    <p className="text-white/50 text-xs leading-relaxed px-6">
-                        Umar has been notified and will contact you via WhatsApp or Email within 24 hours.
-                    </p>
-                </div>
-                <button
-                    onClick={openWhatsApp}
-                    className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#25D366] text-[#020408] text-xs font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-[#25D366]/20"
-                >
-                    <span>Instant WhatsApp</span>
-                    <ExternalLink size={18} />
-                </button>
-            </motion.div>
-        )}
       </div>
 
-      {/* Input Area */}
-      {!isCompleted && (
-        <div className="p-6 bg-white/2 backdrop-blur-3xl border-t border-white/10 flex gap-4">
+      {/* Input Area (Centered & Round) */}
+      <div className="p-6 pt-0">
+        <div className="relative group flex items-center bg-[#1A1D26] border border-white/10 rounded-2xl p-1 focus-within:border-blue-500/50 transition-all shadow-inner">
             <input
-            type="text"
-            placeholder="Type your message..."
-            className="flex-1 bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm text-white placeholder-white/20 focus:outline-none focus:border-blue-500/50 focus:bg-white/10 transition-all font-medium"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSendMessage(inputValue)}
-            disabled={isTyping}
+                type="text"
+                placeholder="Ask me anything about UmarDev..."
+                className="flex-1 bg-transparent px-5 py-4 text-sm text-white placeholder-white/20 focus:outline-none font-medium"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSendMessage(inputValue)}
+                disabled={isTyping}
             />
             <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => handleSendMessage(inputValue)}
-            disabled={!inputValue.trim() || isTyping}
-            className="w-14 h-14 rounded-2xl bg-linear-to-tr from-blue-600 to-indigo-700 text-white flex items-center justify-center transition-all disabled:opacity-30 disabled:grayscale shadow-lg shadow-blue-500/30 group"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleSendMessage(inputValue)}
+                disabled={!inputValue.trim() || isTyping}
+                className="w-12 h-12 rounded-xl bg-blue-600/10 text-white/40 group-focus-within:text-blue-400 hover:bg-blue-600/20 flex items-center justify-center transition-all disabled:opacity-30 disabled:grayscale"
             >
-            <Send size={22} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <Send size={20} />
             </motion.button>
         </div>
-      )}
 
-      {/* Security Badge */}
-      <div className="text-center py-2 bg-[#020408]/80 text-[8px] uppercase tracking-[4px] text-white/10 font-black border-t border-white/5">
-        End-to-End Encrypted Consultation
+        {/* Footer (Farooxium Style) */}
+        <div className="flex items-center justify-center gap-2 mt-4 opacity-30 group">
+            <Sparkle size={14} className="text-white group-hover:animate-spin-slow transition-all" />
+            <span className="text-[10px] font-black uppercase tracking-[3px] text-white">UmarDev AI Assistant</span>
+        </div>
       </div>
     </div>
   );

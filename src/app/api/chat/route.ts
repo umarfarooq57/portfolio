@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const genAI = new GoogleGenerativeAI(process.env.Gemini_API_Key || "");
 
 const SYSTEM_PROMPT = `
 You are the UmarDev AI Assistant, a high-end digital consultant for UmarDev (Digital & Automation Solutions). 
@@ -31,11 +31,11 @@ export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
     
-    if (!process.env.GEMINI_API_KEY) {
+    if (!process.env.Gemini_API_Key) {
       return NextResponse.json({ error: "API Key not configured" }, { status: 500 });
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // Format history for Gemini
     const history = messages.slice(0, -1).map((m: any) => ({
