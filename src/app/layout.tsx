@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import FloatingActions from "@/components/FloatingActions";
 
 // Triggering redeploy with env variables update
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -24,8 +25,6 @@ export const metadata: Metadata = {
   },
 };
 
-import ChatWidget from "@/components/ChatWidget";
-
 export default function RootLayout({
   children,
 }: {
@@ -40,7 +39,7 @@ export default function RootLayout({
         className={`${inter.variable} ${poppins.variable} bg-[#020408] text-white antialiased`}
       >
         {children}
-        <ChatWidget />
+        <FloatingActions />
       </body>
     </html>
   );
