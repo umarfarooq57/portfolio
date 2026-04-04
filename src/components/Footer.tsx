@@ -87,13 +87,13 @@ export default function Footer() {
                 github.com/umarfarooq57
               </a>
               <a
-                href="https://umarcraft.com/"
+                href="https://farooxium.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-white/40 hover:text-white transition-colors flex items-center gap-2"
               >
                 <Globe size={14} />
-                umarcraft.com
+                farooxium.dev
               </a>
             </div>
           </div>

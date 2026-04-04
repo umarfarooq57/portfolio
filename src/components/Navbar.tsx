@@ -1,7 +1,5 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
@@ -23,24 +21,36 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [mobileOpen]);
+
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, delay: 2.3 }}
+      transition={{ duration: 0.6, delay: 0.5 }} // Reduced delay for faster initial feel
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled ? "nav-glass py-3 shadow-2xl" : "py-5 bg-transparent"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <Link href="#hero" className="flex items-center gap-3 group">
+        <Link href="#hero" className="flex items-center gap-3 group z-50">
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center group-hover:glow-blue hover:scale-105 transition-all duration-300 relative overflow-hidden shadow-[0_0_15px_rgba(124,58,237,0.3)] border border-white/10"
             style={{ background: "linear-gradient(135deg, #0f172a, #1e1b4b)" }}
           >
             <div className="absolute inset-0 bg-linear-to-br from-blue-500/20 to-purple-500/20 opacity-50 group-hover:opacity-100 transition-opacity" />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400 font-black text-lg tracking-tighter drop-shadow-md z-10 font-poppins">UC</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400 font-black text-lg tracking-tighter drop-shadow-md z-10 font-poppins text-white">UC</span>
           </div>
           <span className="text-white font-black text-xl tracking-wide font-poppins">
             Umar<span className="text-gradient-blue">Craft</span>
@@ -74,41 +84,80 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-white/70 hover:text-white"
+          className="md:hidden text-white/70 hover:text-white z-50 p-2 transition-all"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          <AnimatePresence mode="wait">
+            {mobileOpen ? (
+              <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
+                <X size={26} />
+              </motion.div>
+            ) : (
+              <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
+                <Menu size={26} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </button>
       </nav>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0 }}
-          className="md:hidden nav-glass border-t border-white/5 px-6 py-4 flex flex-col gap-4"
-        >
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="text-sm text-white/70 hover:text-white transition-colors py-1"
+      {/* Mobile menu overlay */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-md z-40 md:hidden"
               onClick={() => setMobileOpen(false)}
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-[280px] bg-[#020408]/95 border-l border-white/5 z-50 md:hidden p-10 flex flex-col justify-center gap-8 shadow-[-20px_0_40px_rgba(0,0,0,0.4)]"
             >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="#contact"
-            className="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold text-white text-center mt-2"
-            onClick={() => setMobileOpen(false)}
-          >
-            <span>Get Started</span>
-          </Link>
-        </motion.div>
-      )}
+              <div className="flex flex-col gap-6">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.label}
+                    initial={{ x: 20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 + i * 0.1 }}
+                  >
+                    <Link
+                      href={link.href}
+                      className="text-xl text-white font-bold tracking-wide hover:text-blue-400 transition-all flex items-center gap-2 group"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="mt-10"
+              >
+                <Link
+                  href="#contact"
+                  className="btn-primary w-full py-4 rounded-2xl text-base font-bold text-white text-center flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <span>Get Started</span>
+                </Link>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
