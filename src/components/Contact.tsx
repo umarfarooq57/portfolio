@@ -114,17 +114,17 @@ export default function Contact() {
               </a>
 
               <a
-                href="https://umarcraft.com/"
+                href="https://farooxium.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 text-white/60 hover:text-white transition-colors group"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] hover:border-blue-500/20 transition-all group"
               >
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors">
-                  <Globe size={18} className="text-white/70" />
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                  <Globe size={24} />
                 </div>
-                <div>
-                  <p className="text-xs text-white/30 mb-0.5">Website</p>
-                  <p className="text-sm font-medium">umarcraft.com</p>
+                <div className="flex flex-col">
+                  <p className="text-[10px] uppercase tracking-widest text-white/30 font-bold">Official Site</p>
+                  <p className="text-sm font-medium">farooxium.dev</p>
                 </div>
               </a>
             </div>

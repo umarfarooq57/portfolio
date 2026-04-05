@@ -110,7 +110,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-md z-40 md:hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-40 md:hidden"
               onClick={() => setMobileOpen(false)}
             />
             <motion.div
@@ -118,42 +118,61 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[280px] bg-[#020408]/95 border-l border-white/5 z-50 md:hidden p-10 flex flex-col justify-center gap-8 shadow-[-20px_0_40px_rgba(0,0,0,0.4)]"
+              className="fixed top-0 right-0 bottom-0 w-full max-w-[300px] bg-[#020408]/98 border-l border-white/10 z-50 md:hidden flex flex-col shadow-[-20px_0_40px_rgba(0,0,0,0.6)]"
             >
-              <div className="flex flex-col gap-6">
+              {/* Mobile Sidebar Header */}
+              <div className="flex items-center justify-between p-6 border-b border-white/5">
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center bg-linear-to-br from-blue-500/20 to-purple-500/20 border border-white/10"
+                  >
+                    <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-400 font-black text-xs tracking-tighter">UC</span>
+                  </div>
+                  <span className="text-white font-bold text-lg font-poppins">
+                    Umar<span className="text-blue-400">Craft</span>
+                  </span>
+                </div>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="p-2 text-white/50 hover:text-white transition-colors"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Mobile Links */}
+              <div className="flex-1 overflow-y-auto py-8 px-6 flex flex-col gap-2">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.label}
                     initial={{ x: 20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 + i * 0.1 }}
+                    transition={{ delay: 0.1 + i * 0.05 }}
                   >
                     <Link
                       href={link.href}
-                      className="text-xl text-white font-bold tracking-wide hover:text-blue-400 transition-all flex items-center gap-2 group"
+                      className="flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-all group"
                       onClick={() => setMobileOpen(false)}
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      {link.label}
+                      <span className="text-lg font-semibold text-white/70 group-hover:text-white transition-colors">
+                        {link.label}
+                      </span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </Link>
                   </motion.div>
                 ))}
               </div>
 
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="mt-10"
-              >
+              {/* Mobile Sidebar Footer (CTA) */}
+              <div className="p-6 border-t border-white/5 bg-white/[0.02]">
                 <Link
                   href="#contact"
-                  className="btn-primary w-full py-4 rounded-2xl text-base font-bold text-white text-center flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
+                  className="btn-primary w-full py-4 rounded-xl text-base font-bold text-white text-center flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20"
                   onClick={() => setMobileOpen(false)}
                 >
                   <span>Get Started</span>
                 </Link>
-              </motion.div>
+              </div>
             </motion.div>
           </>
         )}
