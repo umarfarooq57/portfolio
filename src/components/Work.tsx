@@ -1,74 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
-
-const projects = [
-  {
-    title: "Unique Job Services",
-    category: "Web Platform",
-    desc: "A comprehensive employment and recruitment agency platform to connect professionals with top employers. Features job boards and attendance tracking.",
-    link: "https://apply.uniquejob.ca/",
-    imageAlt: "Unique Job Services",
-    image: "/ujs.png", // Requires user to put ujs.png in public folder
-    colorClass: "from-blue-500 to-cyan-500",
-  },
-  {
-    title: "Smart Attendance System",
-    category: "Hardware & SaaS",
-    desc: "Real-time biometric attendance tracker with fingerprint scanning, synced to a custom HR cloud dashboard for workforce visibility.",
-    link: "https://uniquejob.ca/ui/",
-    imageAlt: "Smart Attendance",
-    image: "/biometric.png", // Requires user to put biometric.png in public folder
-    colorClass: "from-purple-500 to-indigo-500",
-  },
-  {
-    title: "AI Voice Cloning Engine",
-    category: "AI / Voice",
-    desc: "Integrated state-of-the-art TTS models for on-demand audio generation with 95% voice accuracy for content creators.",
-    link: "#",
-    imageAlt: "AI Voice",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop",
-    colorClass: "from-pink-500 to-red-500",
-  },
-  {
-    title: "eCommerce Platform",
-    category: "eCommerce",
-    desc: "Scalable online store handling thousands of daily orders with real-time inventory and Stripe payment integration.",
-    link: "#",
-    imageAlt: "eCommerce",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
-    colorClass: "from-green-500 to-emerald-500",
-  },
-  {
-    title: "Warehouse Inventory System",
-    category: "Operations",
-    desc: "Centralized inventory dashboard with barcode scanning, reducing stock discrepancies by 90% and speeding up fulfillment.",
-    link: "#",
-    imageAlt: "Inventory",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-    colorClass: "from-yellow-500 to-orange-500",
-  },
-  {
-    title: "Bus Ticket Booking Engine",
-    category: "Transport",
-    desc: "Real-time seat booking system with QR code ticketing, route management, and a comprehensive admin analytics dashboard.",
-    link: "#",
-    imageAlt: "Bus Ticketing",
-    image: "https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=800&auto=format&fit=crop",
-    colorClass: "from-indigo-500 to-blue-500",
-  },
-  {
-    title: "DocuForge PDF Platform",
-    category: "SaaS / Utilities",
-    desc: "Enterprise-grade PDF processing platform. Fast, secure, and reliable tools to merge, split, convert, and edit documents.",
-    link: "https://likespdf.vercel.app/",
-    imageAlt: "DocuForge PDF Platform",
-    image: "https://image.thum.io/get/width/1200/crop/800/https://likespdf.vercel.app/",
-    colorClass: "from-red-500 to-orange-500",
-  }
-];
-
+import Link from "next/link";
+import { projects } from "@/data/projects";
+import AnimatedProjectImage from "./AnimatedProjectImage";
 export default function Work() {
   return (
     <section id="work" className="relative py-20 pt-24 overflow-hidden">
@@ -95,7 +30,7 @@ export default function Work() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {projects.map((project, i) => (
+          {projects.slice(0, 6).map((project, i) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
@@ -107,16 +42,16 @@ export default function Work() {
               {/* Image Area */}
               <div className="relative w-full aspect-video sm:h-52 bg-[#0a0f1c] border-b border-white/5 overflow-hidden flex items-center justify-center">
                 
-                {/* Dynamically load the image */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img 
-                  src={project.image} 
+                {/* Dynamically load the animated 3D image or static image */}
+                <AnimatedProjectImage 
+                  image={project.image} 
+                  images={project.images} 
                   alt={project.imageAlt} 
-                  className="w-full h-full object-contain filter group-hover:brightness-110 transition-all duration-300 relative z-10" 
                 />
+                
                 <div className="absolute inset-0 bg-[#020408]/40" />
                 <div className="absolute inset-0 opacity-20 blur-2xl" 
-                     style={{ backgroundImage: `url(${project.image})`, backgroundSize: 'cover' }} />
+                     style={{ backgroundImage: `url(${project.images?.[0] || project.image})`, backgroundSize: 'cover' }} />
 
                 {/* Hover Overlay for Live Links */}
                 {project.link !== "#" && (
@@ -162,9 +97,9 @@ export default function Work() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <button className="glass-card px-8 py-4 rounded-xl text-sm font-semibold text-white hover:bg-white/5 transition-colors border border-white/10 hover:border-white/20 hover:scale-105 active:scale-95 duration-200">
+          <Link href="/projects" className="glass-card px-8 py-4 rounded-xl text-sm font-semibold text-white hover:bg-white/5 transition-colors border border-white/10 hover:border-white/20 hover:scale-105 active:scale-95 duration-200 inline-block">
             View All Projects
-          </button>
+          </Link>
         </motion.div>
 
       </div>

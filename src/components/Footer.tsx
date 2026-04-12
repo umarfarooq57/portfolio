@@ -5,11 +5,11 @@ import { Mail, ArrowUpRight, Globe } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const links = [
-  { label: "Services", href: "#services" },
-  { label: "Work", href: "#work" },
-  { label: "Tech Stack", href: "#techstack" },
-  { label: "Process", href: "#process" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/#services" },
+  { label: "Work", href: "/#work" },
+  { label: "Tech Stack", href: "/#techstack" },
+  { label: "Process", href: "/#process" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Footer() {
