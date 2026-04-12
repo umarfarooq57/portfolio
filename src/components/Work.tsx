@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 import { projects } from "@/data/projects";
 import AnimatedProjectImage from "./AnimatedProjectImage";
 export default function Work() {

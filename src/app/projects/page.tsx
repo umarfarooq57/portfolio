@@ -3,7 +3,6 @@ import { ExternalLink, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import AnimatedProjectImage from "@/components/AnimatedProjectImage";
-import Loader from "@/components/Loader";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
