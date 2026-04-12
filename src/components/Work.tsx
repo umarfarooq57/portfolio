@@ -57,6 +57,15 @@ const projects = [
     imageAlt: "Bus Ticketing",
     image: "https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=800&auto=format&fit=crop",
     colorClass: "from-indigo-500 to-blue-500",
+  },
+  {
+    title: "DocuForge PDF Platform",
+    category: "SaaS / Utilities",
+    desc: "Enterprise-grade PDF processing platform. Fast, secure, and reliable tools to merge, split, convert, and edit documents.",
+    link: "https://likespdf.vercel.app/",
+    imageAlt: "DocuForge PDF Platform",
+    image: "https://image.thum.io/get/width/1200/crop/800/https://likespdf.vercel.app/",
+    colorClass: "from-red-500 to-orange-500",
   }
 ];
 
